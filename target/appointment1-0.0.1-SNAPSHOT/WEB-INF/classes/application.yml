@@ -1,0 +1,70 @@
+server:
+  port: 8080
+  sessionTimeout: 30
+  #浣垮緱淇敼jsp鍙互涓嶉噸鍚敓鏁�
+  jsp-servlet:
+    init-parameters:
+      development: true
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/appointment?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+    sql-script-encoding: utf-8
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 鍒濆鍖栧ぇ灏忥紝鏈�灏忥紝鏈�澶�
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    # 閰嶇疆鑾峰彇杩炴帴绛夊緟瓒呮椂鐨勬椂闂�
+    maxWait: 60000
+    # 閰嶇疆闂撮殧澶氫箙鎵嶈繘琛屼竴娆℃娴嬶紝妫�娴嬮渶瑕佸叧闂殑绌洪棽杩炴帴锛屽崟浣嶆槸姣
+    timeBetweenEvictionRunsMillis: 60000
+    # 閰嶇疆涓�涓繛鎺ュ湪姹犱腑鏈�灏忕敓瀛樼殑鏃堕棿锛屽崟浣嶆槸姣
+    minEvictableIdleTimeMillis: 300000  
+    validationQuery: SELECT 1 FROM DUAL  
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 鎵撳紑PSCache锛屽苟涓旀寚瀹氭瘡涓繛鎺ヤ笂PSCache鐨勫ぇ灏�
+    poolPreparedStatements: true  
+    maxPoolPreparedStatementPerConnectionSize: 20
+    # 閰嶇疆鐩戞帶缁熻鎷︽埅鐨刦ilters锛屽幓鎺夊悗鐩戞帶鐣岄潰sql鏃犳硶缁熻锛�'wall'鐢ㄤ簬闃茬伀澧�
+    filters: stat,wall,log4j
+    # 閫氳繃connectProperties灞炴�ф潵鎵撳紑mergeSql鍔熻兘锛涙參SQL璁板綍
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 
+    # 鍚堝苟澶氫釜DruidDataSource鐨勭洃鎺ф暟鎹�
+    #useGlobalDataSourceStat: true
+  mvc:
+    view:
+      prefix: /jsp/
+      suffix: .jsp
+  http:
+    encoding.charset: UTF-8  
+    encoding.enable: true  
+    encoding.force: true
+    #璁剧疆涓婁紶鏂囦欢鐨勫ぇ灏忓拰鍗曟璇锋眰鏂囦欢鎬绘暟
+    multipart:
+      maxFileSize: 100Mb
+      maxRequestSize: 1000Mb
+  jpa: 
+    showsql: true
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: root
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+mybatis:
+  #config-locations: classpath:mapper/mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  config: classpath:logback.xml
+debug: true
